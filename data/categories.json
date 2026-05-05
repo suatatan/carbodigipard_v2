@@ -1,0 +1,9 @@
+[
+  { "id": "duyuru", "labelTr": "Duyuru", "labelEn": "Announcement" },
+  { "id": "etkinlik", "labelTr": "Etkinlik", "labelEn": "Event" },
+  { "id": "yayin", "labelTr": "Yayın", "labelEn": "Publication" },
+  { "id": "rapor", "labelTr": "Rapor", "labelEn": "Report" },
+  { "id": "video", "labelTr": "Video", "labelEn": "Video" },
+  { "id": "egitim", "labelTr": "Eğitim", "labelEn": "Training" },
+  { "id": "rehber", "labelTr": "Rehber", "labelEn": "Guide" }
+]

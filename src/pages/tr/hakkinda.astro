@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PartnerLogos from '../../components/PartnerLogos.astro';
+import siteSettings from '../../../data/site-settings.json';
+---
+
+<BaseLayout
+  title="Proje Hakkında"
+  description="CARBODIGIPARD projesi hakkında ayrıntılı bilgi — amaçlar, metodoloji, iş paketleri ve proje ekibi."
+  lang="tr"
+>
+  <div class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Sayfa yolu">
+        <a href="/tr">Ana Sayfa</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Proje Hakkında</span>
+      </nav>
+      <h1>Proje Hakkında</h1>
+      <p>CARBODIGIPARD — Karbon Dijitalleştirme Projesi</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container about-layout">
+      <article class="prose about-content">
+        <h2>Projenin Genel Çerçevesi</h2>
+        <p>
+          CARBODIGIPARD, Horizon Avrupa programı kapsamında finanse edilen çok uluslu bir araştırma ve geliştirme projesidir. Proje, tarım ve sanayi sektörlerinde karbon ayak izinin dijital araçlarla ölçülmesi, izlenmesi ve azaltılması için yenilikçi yöntemler geliştirmeyi amaçlamaktadır.
+        </p>
+
+        <h2>Amaçlar ve Hedefler</h2>
+        <p>Proje kapsamında aşağıdaki temel hedeflere ulaşmak planlanmaktadır:</p>
+        <ul>
+          <li>Tarım ve sanayi sektörlerine özgü karbon ölçüm metodolojileri geliştirmek</li>
+          <li>Gerçek zamanlı veri toplama ve analiz için dijital platformlar tasarlamak</li>
+          <li>Paydaşların karbon yönetimi kapasitesini artırmaya yönelik eğitim programları düzenlemek</li>
+          <li>Proje bulgularını Avrupa Yeşil Mutabakatı politikalarına katkı sağlayacak biçimde yayımlamak</li>
+        </ul>
+
+        <h2>İş Paketleri</h2>
+
+        <h3>WP1 — Proje Koordinasyonu ve Yönetim</h3>
+        <p>
+          Proje faaliyetlerinin etkin biçimde yürütülmesini, ortaklar arasında koordinasyonu ve AB raporlama yükümlülüklerinin karşılanmasını sağlar.
+        </p>
+
+        <h3>WP2 — Metodoloji Geliştirme</h3>
+        <p>
+          Uluslararası standartlarla uyumlu (ISO 14064, GHG Protokolü) karbon ölçüm metodolojilerinin geliştirilmesi ve doğrulanması bu iş paketi kapsamında yürütülür.
+        </p>
+
+        <h3>WP3 — Dijital Araç Geliştirme</h3>
+        <p>
+          Kullanıcı dostu dijital platformların ve mobil uygulamaların tasarımı, geliştirilmesi ve pilot testlerinin yapılması bu pakette ele alınmaktadır.
+        </p>
+
+        <h3>WP4 — Pilot Uygulama ve Değerlendirme</h3>
+        <p>
+          Geliştirilen araçların altı ülkedeki pilot bölgelerde uygulanması ve sonuçların bilimsel olarak değerlendirilmesi bu pakette gerçekleştirilir.
+        </p>
+
+        <h3>WP5 — Yaygınlaştırma ve İletişim</h3>
+        <p>
+          Proje sonuçlarının hedef kitlelere duyurulması, yayınlar, konferanslar ve bu web sitesi aracılığıyla gerçekleştirilir.
+        </p>
+
+        <h2>Proje Bilgileri</h2>
+        <table class="info-table">
+          <tbody>
+            <tr>
+              <th>Program</th>
+              <td>{siteSettings.programTr}</td>
+            </tr>
+            <tr>
+              <th>Hibe Anlaşması No</th>
+              <td>{siteSettings.grantAgreement}</td>
+            </tr>
+            <tr>
+              <th>Proje Süresi</th>
+              <td>Ocak 2024 — Aralık 2026 (36 ay)</td>
+            </tr>
+            <tr>
+              <th>Koordinatör Kuruluş</th>
+              <td>Ankara Üniversitesi, Türkiye</td>
+            </tr>
+            <tr>
+              <th>Ortak Sayısı</th>
+              <td>6 kuruluş, 6 ülke</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <aside class="about-sidebar">
+        <div class="sidebar-card">
+          <h3 class="sidebar-card__title">Proje Durumu</h3>
+          <div class="project-status">
+            <div class="status-item status-item--active">
+              <span class="status-dot"></span>
+              <span>Devam Ediyor</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar__fill" style="width: 55%"></div>
+            </div>
+            <p class="status-desc">Proje Ocak 2024'te başlamış olup Aralık 2026'ya kadar devam edecektir.</p>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h3 class="sidebar-card__title">İletişim</h3>
+          <p class="sidebar-contact__desc">Proje ile ilgili sorularınız için:</p>
+          <a href={`mailto:${siteSettings.contactEmail}`} class="sidebar-contact__email">
+            {siteSettings.contactEmail}
+          </a>
+        </div>
+
+        <div class="sidebar-card sidebar-card--highlight">
+          <p class="sidebar-funding">
+            Bu proje Avrupa Birliği tarafından finanse edilmektedir. Açıklanan görüşler ve ifade edilen bilgiler yalnızca yazarlara aittir ve Avrupa Birliği'nin görüşlerini yansıtmaz.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <PartnerLogos lang="tr" />
+</BaseLayout>
+
+<style>
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .info-table th,
+  .info-table td {
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--color-border-light);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .info-table th {
+    background: var(--color-surface);
+    font-weight: 600;
+    width: 40%;
+    color: var(--color-text);
+  }
+
+  .sidebar-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .sidebar-card--highlight {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+  }
+
+  .sidebar-card__title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--color-success);
+    margin-bottom: 0.75rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-success);
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: var(--color-surface-alt);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+
+  .progress-bar__fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: 3px;
+  }
+
+  .status-desc {
+    font-size: 0.83rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .sidebar-contact__desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .sidebar-contact__email {
+    font-size: 0.9rem;
+    font-weight: 600;
+    word-break: break-all;
+  }
+
+  .sidebar-funding {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 0;
+    font-style: italic;
+  }
+
+  @media (max-width: 900px) {
+    .about-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

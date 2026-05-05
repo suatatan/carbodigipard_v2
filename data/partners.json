@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Ankara Üniversitesi",
+    "abbreviation": "AU",
+    "country": "Türkiye",
+    "role": "Koordinatör",
+    "website": "https://www.ankara.edu.tr",
+    "logo": ""
+  },
+  {
+    "id": 2,
+    "name": "Wageningen University & Research",
+    "abbreviation": "WUR",
+    "country": "Hollanda",
+    "role": "Ortak",
+    "website": "https://www.wur.nl",
+    "logo": ""
+  },
+  {
+    "id": 3,
+    "name": "University of Bologna",
+    "abbreviation": "UNIBO",
+    "country": "İtalya",
+    "role": "Ortak",
+    "website": "https://www.unibo.it",
+    "logo": ""
+  },
+  {
+    "id": 4,
+    "name": "Warsaw University of Life Sciences",
+    "abbreviation": "SGGW",
+    "country": "Polonya",
+    "role": "Ortak",
+    "website": "https://www.sggw.edu.pl",
+    "logo": ""
+  },
+  {
+    "id": 5,
+    "name": "Thünen Institute",
+    "abbreviation": "TI",
+    "country": "Almanya",
+    "role": "Ortak",
+    "website": "https://www.thuenen.de",
+    "logo": ""
+  },
+  {
+    "id": 6,
+    "name": "Instituto Nacional de Investigación y Tecnología Agraria y Alimentaria",
+    "abbreviation": "INIA",
+    "country": "İspanya",
+    "role": "Ortak",
+    "website": "https://www.inia.es",
+    "logo": ""
+  }
+]

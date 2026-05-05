@@ -1,0 +1,307 @@
+---
+import siteSettings from '../../data/site-settings.json';
+import socialLinks from '../../data/social-links.json';
+import partners from '../../data/partners.json';
+
+interface Props {
+  lang: 'tr' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const footerLinks = lang === 'tr'
+  ? [
+      { label: 'Ana Sayfa', href: '/tr' },
+      { label: 'Proje Hakkında', href: '/tr/hakkinda' },
+      { label: 'Haberler', href: '/tr/haberler' },
+      { label: 'Eğitim Materyalleri', href: '/tr/egitim' },
+    ]
+  : [
+      { label: 'Home', href: '/en' },
+      { label: 'About', href: '/en/about' },
+      { label: 'News', href: '/en/news' },
+      { label: 'Training Materials', href: '/en/training' },
+    ];
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-main">
+    <div class="container footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href={`/${lang}`} class="footer-logo">
+          <span class="footer-logo__mark" aria-hidden="true">C</span>
+          <span class="footer-logo__text"><strong>{siteSettings.title}</strong></span>
+        </a>
+        <p class="footer-brand__desc">
+          {lang === 'tr' ? siteSettings.descriptionTr : siteSettings.descriptionEn}
+        </p>
+        <div class="footer-social">
+          {socialLinks.map((link) => (
+            <a
+              href={link.url}
+              class="footer-social__link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.platform}
+              title={link.platform}
+            >
+              <span aria-hidden="true">{link.icon}</span>
+              <span class="footer-social__label">{link.platform}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="footer-nav">
+        <h3 class="footer-section__title">
+          {lang === 'tr' ? 'Bağlantılar' : 'Links'}
+        </h3>
+        <ul class="footer-nav__list">
+          {footerLinks.map((item) => (
+            <li>
+              <a href={item.href} class="footer-nav__link">{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Partners -->
+      <div class="footer-partners">
+        <h3 class="footer-section__title">
+          {lang === 'tr' ? 'Ortaklar' : 'Partners'}
+        </h3>
+        <div class="footer-partners__grid">
+          {partners.slice(0, 6).map((partner) => (
+            <a
+              href={partner.website ?? '#'}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-partner__item"
+              title={partner.name}
+            >
+              {partner.logo
+                ? <img src={partner.logo} alt={partner.name} width="80" height="40" loading="lazy" />
+                : <span class="footer-partner__name">{partner.name}</span>
+              }
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom__inner">
+      <p>
+        &copy; {new Date().getFullYear()} {siteSettings.title}.
+        {lang === 'tr'
+          ? `${siteSettings.fundingTr}`
+          : `${siteSettings.fundingEn}`}
+      </p>
+      <div class="footer-bottom__langs">
+        <a href="/tr" class:list={['footer-lang-link', { active: lang === 'tr' }]}>TR</a>
+        <span aria-hidden="true">/</span>
+        <a href="/en" class:list={['footer-lang-link', { active: lang === 'en' }]}>EN</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #0f1b3d;
+    color: rgba(255,255,255,0.75);
+    margin-top: auto;
+  }
+
+  .footer-main {
+    padding-block: 3rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.5fr;
+    gap: 3rem;
+  }
+
+  /* Brand */
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo:hover { text-decoration: none; }
+
+  .footer-logo__mark {
+    width: 36px;
+    height: 36px;
+    background: var(--color-accent);
+    color: #0f1b3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 900;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+
+  .footer-logo__text {
+    color: white;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-brand__desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-social__link {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .footer-social__link:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    text-decoration: none;
+  }
+
+  /* Nav */
+  .footer-section__title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+
+  .footer-nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-nav__link {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-nav__link:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  /* Partners */
+  .footer-partners__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .footer-partner__item {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.08);
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+
+  .footer-partner__item:hover {
+    background: rgba(255,255,255,0.15);
+    text-decoration: none;
+  }
+
+  .footer-partner__item img {
+    height: 32px;
+    width: auto;
+    filter: brightness(0) invert(1) opacity(0.8);
+    object-fit: contain;
+  }
+
+  .footer-partner__name {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  /* Bottom bar */
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-block: 1rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .footer-bottom__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-bottom__langs {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  .footer-lang-link {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .footer-lang-link:hover,
+  .footer-lang-link.active {
+    color: white;
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

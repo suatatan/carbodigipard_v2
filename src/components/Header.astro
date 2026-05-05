@@ -1,0 +1,319 @@
+---
+import siteSettings from '../../data/site-settings.json';
+import socialLinks from '../../data/social-links.json';
+
+interface Props {
+  lang: 'tr' | 'en';
+}
+
+const { lang } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const navItems = lang === 'tr'
+  ? [
+      { label: 'Ana Sayfa', href: '/tr' },
+      { label: 'Proje Hakkında', href: '/tr/hakkinda' },
+      { label: 'Haberler', href: '/tr/haberler' },
+      { label: 'Eğitim Materyalleri', href: '/tr/egitim' },
+    ]
+  : [
+      { label: 'Home', href: '/en' },
+      { label: 'About', href: '/en/about' },
+      { label: 'News', href: '/en/news' },
+      { label: 'Training Materials', href: '/en/training' },
+    ];
+
+const altLang = lang === 'tr' ? 'en' : 'tr';
+const altLabel = lang === 'tr' ? 'English' : 'Türkçe';
+
+// Build alternate language path
+function buildAltPath(path: string, current: string, alt: string): string {
+  if (path.startsWith(`/${current}`)) {
+    return `/${alt}${path.slice(current.length + 1)}`;
+  }
+  return `/${alt}`;
+}
+const altPath = buildAltPath(currentPath, lang, altLang);
+---
+
+<header class="site-header" role="banner">
+  <div class="header-top">
+    <div class="container header-top__inner">
+      <span class="header-top__tagline">
+        {lang === 'tr' ? siteSettings.taglineTr : siteSettings.taglineEn}
+      </span>
+      <div class="header-top__actions">
+        <a href={altPath} class="lang-switch" aria-label={altLabel}>
+          <span class="lang-switch__flag" aria-hidden="true">
+            {lang === 'tr' ? '🇬🇧' : '🇹🇷'}
+          </span>
+          {altLabel}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="container header-main__inner">
+      <a href={`/${lang}`} class="site-logo" aria-label={`${siteSettings.title} Ana Sayfa`}>
+        <img
+          src="/uploads/carbodigipard-logo.webp"
+          alt={siteSettings.title}
+          class="site-logo__img"
+          width="44"
+          height="44"
+          loading="eager"
+        />
+        <span class="site-logo__text">
+          <strong>{siteSettings.title}</strong>
+        </span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        aria-label={lang === 'tr' ? 'Menüyü aç/kapat' : 'Toggle navigation'}
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" role="navigation" aria-label={lang === 'tr' ? 'Ana Navigasyon' : 'Main Navigation'}>
+        <ul class="main-nav__list">
+          {navItems.map((item) => (
+            <li class="main-nav__item">
+              <a
+                href={item.href}
+                class:list={['main-nav__link', { 'main-nav__link--active': currentPath === item.href || (item.href !== `/${lang}` && currentPath.startsWith(item.href)) }]}
+                aria-current={currentPath === item.href ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement | null;
+  const nav = document.getElementById('main-nav');
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('main-nav--open');
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!toggle.contains(e.target as Node) && !nav.contains(e.target as Node)) {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('main-nav--open');
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  }
+
+  /* Top bar */
+  .header-top {
+    background: var(--color-primary-dark);
+    color: rgba(255,255,255,0.75);
+    font-size: 0.8rem;
+    padding-block: 0.35rem;
+  }
+
+  .header-top__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .header-top__tagline {
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+  }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+    font-size: 0.78rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .lang-switch:hover {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    text-decoration: none;
+  }
+
+  /* Main header */
+  .header-main {
+    background: var(--color-primary);
+  }
+
+  .header-main__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0;
+    min-height: 64px;
+    gap: 1rem;
+  }
+
+  /* Logo */
+  .site-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .site-logo:hover {
+    text-decoration: none;
+  }
+
+  .site-logo__mark {
+    width: 40px;
+    height: 40px;
+    background: var(--color-accent);
+    color: var(--color-primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+  }
+
+  .site-logo__img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: white;
+  }
+
+  .site-logo__text {
+    color: white;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+  }
+
+  .site-logo__text strong {
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+
+  /* Nav */
+  .main-nav__list {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .main-nav__link {
+    display: block;
+    padding: 1.2rem 1rem;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .main-nav__link:hover,
+  .main-nav__link--active {
+    color: white;
+    border-bottom-color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  /* Mobile toggle */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+  }
+
+  .nav-toggle__bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .main-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-primary-dark);
+      box-shadow: var(--shadow-md);
+      z-index: 99;
+    }
+
+    .main-nav--open {
+      display: block;
+    }
+
+    .main-nav__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .main-nav__link {
+      padding: 0.85rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid transparent;
+    }
+
+    .main-nav__link--active {
+      border-bottom-color: rgba(255,255,255,0.08);
+      border-left-color: var(--color-accent);
+    }
+
+    .header-top__tagline {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allNews = await getCollection('tr-news');
+  return allNews.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Date(post.data.date).toLocaleDateString('tr-TR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.summary}
+  lang="tr"
+  image={post.data.image}
+>
+  <div class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Sayfa yolu">
+        <a href="/tr">Ana Sayfa</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="/tr/haberler">Haberler</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">{post.data.title}</span>
+      </nav>
+      <h1>{post.data.title}</h1>
+      <p>{post.data.summary}</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container news-detail-layout">
+      <article class="news-article">
+        {post.data.image && (
+          <img
+            src={post.data.image}
+            alt={post.data.title}
+            class="news-article__hero-img"
+            width="800"
+            height="450"
+          />
+        )}
+        <div class="news-article__meta">
+          {post.data.category && (
+            <span class="badge badge--blue">{post.data.category}</span>
+          )}
+          <time datetime={post.data.date} class="news-article__date">
+            {formattedDate}
+          </time>
+        </div>
+        <div class="prose">
+          <Content />
+        </div>
+        <div class="news-article__back">
+          <a href="/tr/haberler" class="btn btn--outline">
+            &larr; Tüm Haberler
+          </a>
+        </div>
+      </article>
+
+      <aside class="news-sidebar">
+        <div class="sidebar-card">
+          <h3 class="sidebar-card__title">Haber Bilgileri</h3>
+          <dl class="news-meta-list">
+            <dt>Tarih</dt>
+            <dd>{formattedDate}</dd>
+            {post.data.category && (
+              <>
+                <dt>Kategori</dt>
+                <dd>{post.data.category}</dd>
+              </>
+            )}
+          </dl>
+        </div>
+        <div class="sidebar-card">
+          <h3 class="sidebar-card__title">Dil</h3>
+          <a href={`/en/news/${post.id}`} class="lang-alt-link">
+            Read in English
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .news-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .news-article__hero-img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+    max-height: 450px;
+  }
+
+  .news-article__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .news-article__date {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+
+  .news-article__back {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .sidebar-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .sidebar-card__title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .news-meta-list {
+    font-size: 0.88rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 0.75rem;
+  }
+
+  .news-meta-list dt {
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .lang-alt-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .news-detail-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

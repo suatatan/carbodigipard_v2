@@ -1,0 +1,109 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  date: string;
+  slug: string;
+  category?: string;
+  image?: string;
+  videoUrl?: string;
+  duration?: string;
+  lang: 'tr' | 'en';
+}
+
+const { title, summary, date, slug, category, image, videoUrl, duration, lang } = Astro.props;
+const basePath = lang === 'tr' ? '/tr/egitim' : '/en/training';
+const viewLabel = lang === 'tr' ? 'İncele' : 'View';
+
+const formattedDate = new Date(date).toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<article class="card training-card">
+  {image
+    ? <img src={image} alt={title} class="card__image" loading="lazy" width="600" height="338" />
+    : (
+      <div class="card__image-placeholder training-card__placeholder" aria-hidden="true">
+        {videoUrl && <span class="training-card__play-icon" aria-hidden="true">&#9654;</span>}
+        {!videoUrl && <span class="training-card__doc-icon" aria-hidden="true">&#128196;</span>}
+      </div>
+    )
+  }
+  <div class="card__body">
+    <div class="card__meta">
+      {category && <span class="card__category">{category}</span>}
+      <time datetime={date}>{formattedDate}</time>
+      {duration && <span class="training-card__duration">{duration}</span>}
+    </div>
+    <h3 class="card__title">
+      <a href={`${basePath}/${slug}`}>{title}</a>
+    </h3>
+    <p class="card__summary">{summary}</p>
+    <div class="card__footer">
+      <a href={`${basePath}/${slug}`} class="btn btn--outline btn--sm">
+        {viewLabel}
+      </a>
+      {videoUrl && (
+        <a href={videoUrl} target="_blank" rel="noopener noreferrer" class="btn btn--sm training-card__video-btn">
+          {lang === 'tr' ? 'Videoyu Izle' : 'Watch Video'}
+        </a>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .training-card__placeholder {
+    background: linear-gradient(135deg, #e3eaf8 0%, #c8d6f0 100%);
+  }
+
+  .training-card__play-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    opacity: 0.5;
+  }
+
+  .training-card__doc-icon {
+    font-size: 2rem;
+    color: var(--color-text-muted);
+    opacity: 0.5;
+  }
+
+  .training-card__duration {
+    background: #fdf3cc;
+    color: #856a00;
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .btn--sm {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.9rem;
+  }
+
+  .training-card__video-btn {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+    font-size: 0.82rem;
+    padding: 0.4rem 0.9rem;
+  }
+
+  .training-card__video-btn:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    text-decoration: none;
+    color: white;
+  }
+
+  .card__footer {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+</style>

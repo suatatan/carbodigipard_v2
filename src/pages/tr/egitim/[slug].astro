@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allTraining = await getCollection('tr-training');
+  return allTraining.map((item) => ({
+    params: { slug: item.id },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+
+const formattedDate = new Date(item.data.date).toLocaleDateString('tr-TR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout
+  title={item.data.title}
+  description={item.data.summary}
+  lang="tr"
+  image={item.data.image}
+>
+  <div class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Sayfa yolu">
+        <a href="/tr">Ana Sayfa</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <a href="/tr/egitim">Eğitim Materyalleri</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">{item.data.title}</span>
+      </nav>
+      <h1>{item.data.title}</h1>
+      <p>{item.data.summary}</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container training-detail-layout">
+      <article class="training-article">
+        {item.data.videoUrl && (
+          <div class="video-embed-wrapper">
+            <iframe
+              src={item.data.videoUrl}
+              title={item.data.title}
+              frameborder="0"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+        )}
+        {item.data.image && !item.data.videoUrl && (
+          <img
+            src={item.data.image}
+            alt={item.data.title}
+            class="training-article__hero-img"
+            width="800"
+            height="450"
+          />
+        )}
+        <div class="training-article__meta">
+          {item.data.category && (
+            <span class="badge badge--gold">{item.data.category}</span>
+          )}
+          {item.data.duration && (
+            <span class="badge badge--blue">{item.data.duration}</span>
+          )}
+          <time datetime={item.data.date} class="training-article__date">
+            {formattedDate}
+          </time>
+        </div>
+        <div class="prose">
+          <Content />
+        </div>
+        <div class="training-article__back">
+          <a href="/tr/egitim" class="btn btn--outline">
+            &larr; Tüm Materyaller
+          </a>
+        </div>
+      </article>
+
+      <aside class="training-sidebar">
+        <div class="sidebar-card">
+          <h3 class="sidebar-card__title">Materyal Bilgileri</h3>
+          <dl class="meta-list">
+            <dt>Tarih</dt>
+            <dd>{formattedDate}</dd>
+            {item.data.category && (
+              <>
+                <dt>Tür</dt>
+                <dd>{item.data.category}</dd>
+              </>
+            )}
+            {item.data.duration && (
+              <>
+                <dt>Süre</dt>
+                <dd>{item.data.duration}</dd>
+              </>
+            )}
+          </dl>
+        </div>
+        <div class="sidebar-card">
+          <h3 class="sidebar-card__title">Dil</h3>
+          <a href={`/en/training/${item.id}`} class="lang-alt-link">
+            View in English
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .training-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .video-embed-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    background: #000;
+  }
+
+  .video-embed-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .training-article__hero-img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+    max-height: 450px;
+  }
+
+  .training-article__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .training-article__date {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+  }
+
+  .training-article__back {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .sidebar-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .sidebar-card__title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .meta-list {
+    font-size: 0.88rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 0.75rem;
+  }
+
+  .meta-list dt {
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  .lang-alt-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .training-detail-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

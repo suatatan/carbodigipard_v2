@@ -1,0 +1,56 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  date: string;
+  slug: string;
+  category?: string;
+  image?: string;
+  lang: 'tr' | 'en';
+}
+
+const { title, summary, date, slug, category, image, lang } = Astro.props;
+const basePath = lang === 'tr' ? '/tr/haberler' : '/en/news';
+const readMore = lang === 'tr' ? 'Devamını Oku' : 'Read More';
+
+const formattedDate = new Date(date).toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<article class="card news-card">
+  {image
+    ? <img src={image} alt={title} class="card__image" loading="lazy" width="600" height="338" />
+    : <div class="card__image-placeholder" aria-hidden="true"><span class="news-card__placeholder-icon">N</span></div>
+  }
+  <div class="card__body">
+    <div class="card__meta">
+      {category && <span class="card__category">{category}</span>}
+      <time datetime={date}>{formattedDate}</time>
+    </div>
+    <h3 class="card__title">
+      <a href={`${basePath}/${slug}`}>{title}</a>
+    </h3>
+    <p class="card__summary">{summary}</p>
+    <div class="card__footer">
+      <a href={`${basePath}/${slug}`} class="btn btn--outline btn--sm">
+        {readMore}
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .news-card__placeholder-icon {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-border);
+  }
+
+  .btn--sm {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.9rem;
+  }
+</style>

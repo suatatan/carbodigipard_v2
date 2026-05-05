@@ -1,0 +1,373 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PartnerLogos from '../../components/PartnerLogos.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import { getCollection } from 'astro:content';
+import siteSettings from '../../../data/site-settings.json';
+
+const allNews = await getCollection('en-news');
+const featuredNews = allNews
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title="CARBODIGIPARD"
+  description={siteSettings.descriptionEn}
+  lang="en"
+>
+  <!-- Hero -->
+  <section class="hero" aria-label="Main Hero Section">
+    <div class="hero__inner container">
+      <div class="hero__content">
+        <div class="hero__badge">EU-Funded Project</div>
+        <h1 class="hero__title">CARBODIGIPARD</h1>
+        <p class="hero__subtitle">{siteSettings.taglineEn}</p>
+        <p class="hero__desc">{siteSettings.descriptionEn}</p>
+        <div class="hero__actions">
+          <a href="/en/about" class="btn btn--white">About the Project</a>
+          <a href="/en/news" class="btn btn--outline-white">News</a>
+        </div>
+        <div class="hero__meta">
+          <div class="hero__meta-item">
+            <span class="hero__meta-label">Programme</span>
+            <span class="hero__meta-value">{siteSettings.programEn}</span>
+          </div>
+          <div class="hero__meta-sep" aria-hidden="true"></div>
+          <div class="hero__meta-item">
+            <span class="hero__meta-label">Duration</span>
+            <span class="hero__meta-value">2024 — 2026</span>
+          </div>
+          <div class="hero__meta-sep" aria-hidden="true"></div>
+          <div class="hero__meta-item">
+            <span class="hero__meta-label">Partners</span>
+            <span class="hero__meta-value">6 Countries</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero__logo-wrap" aria-hidden="true">
+        <img
+          src="/uploads/carbodigipard-logo.webp"
+          alt="CARBODIGIPARD Logo"
+          class="hero__logo"
+          width="340"
+          height="340"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section class="section highlights-section" aria-label="Project Highlights">
+    <div class="container">
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <div class="highlight-card__icon" aria-hidden="true">01</div>
+          <h3>Carbon Measurement</h3>
+          <p>Carbon footprint measurement methodologies compliant with international standards are being developed for agriculture and industry sectors.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-card__icon" aria-hidden="true">02</div>
+          <h3>Digital Tools</h3>
+          <p>User-friendly digital platforms offer real-time field data collection and analysis capabilities.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-card__icon" aria-hidden="true">03</div>
+          <h3>Capacity Building</h3>
+          <p>Training programmes and implementation guides are being developed for stakeholders across six countries.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-card__icon" aria-hidden="true">04</div>
+          <h3>Policy Support</h3>
+          <p>Project findings are shared through reports contributing to national policies within the European Green Deal framework.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest News -->
+  <section class="section section--alt" aria-label="Latest News">
+    <div class="container">
+      <div class="section-header">
+        <h2>Latest News</h2>
+        <p>Recent developments and announcements from the project</p>
+      </div>
+      <div class="grid-3">
+        {featuredNews.map((post) => (
+          <NewsCard
+            title={post.data.title}
+            summary={post.data.summary}
+            date={post.data.date}
+            slug={post.id}
+            category={post.data.category}
+            image={post.data.image}
+            lang="en"
+          />
+        ))}
+      </div>
+      <div class="section-cta">
+        <a href="/en/news" class="btn btn--outline">View All News</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <PartnerLogos lang="en" />
+
+  <!-- CTA Banner -->
+  <section class="cta-banner" aria-label="Contact">
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__text">
+        <h2>Get Involved</h2>
+        <p>Collaboration opportunities are available for researchers, policy makers, and industry professionals.</p>
+      </div>
+      <div class="cta-banner__actions">
+        <a href={`mailto:${siteSettings.contactEmail}`} class="btn btn--white">
+          {siteSettings.contactEmail}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #001a5e 100%);
+    color: white;
+    padding-block: 5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .hero__content {
+    min-width: 0;
+  }
+
+  .hero__logo-wrap {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero__logo {
+    width: clamp(200px, 22vw, 320px);
+    height: clamp(200px, 22vw, 320px);
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow:
+      0 0 0 8px rgba(255, 255, 255, 0.08),
+      0 0 0 16px rgba(255, 255, 255, 0.04),
+      0 20px 60px rgba(0, 0, 0, 0.35);
+    background: white;
+  }
+
+  .hero__badge {
+    display: inline-block;
+    background: rgba(200, 168, 0, 0.25);
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent-light);
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero__title {
+    color: white;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+  }
+
+  .hero__subtitle {
+    color: var(--color-accent-light);
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .hero__desc {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.05rem;
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn--outline-white {
+    background: transparent;
+    color: rgba(255,255,255,0.9);
+    border-color: rgba(255,255,255,0.5);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .btn--outline-white:hover {
+    border-color: white;
+    color: white;
+    background: rgba(255,255,255,0.1);
+    text-decoration: none;
+  }
+
+  .hero__meta {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hero__meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding-right: 1.5rem;
+  }
+
+  .hero__meta-sep {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.25);
+    margin-right: 1.5rem;
+  }
+
+  .hero__meta-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.55);
+    font-weight: 600;
+  }
+
+  .hero__meta-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .highlights-section {
+    padding-block: 3.5rem;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .highlight-card {
+    padding: 1.5rem;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    background: var(--color-white);
+    transition: box-shadow 0.2s;
+  }
+
+  .highlight-card:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .highlight-card__icon {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-surface-alt);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    user-select: none;
+  }
+
+  .highlight-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary);
+  }
+
+  .highlight-card p {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .section-cta {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .cta-banner {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #001a5e 100%);
+    padding-block: 3rem;
+  }
+
+  .cta-banner__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-banner__text h2 {
+    color: white;
+    margin-bottom: 0.4rem;
+  }
+
+  .cta-banner__text p {
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero__meta-sep { display: none; }
+    .hero__meta { gap: 1rem; }
+    .hero__meta-item { padding-right: 0; }
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero__logo-wrap { display: none; }
+  }
+
+  @media (max-width: 900px) and (min-width: 641px) {
+    .hero__logo {
+      width: 160px;
+      height: 160px;
+    }
+  }
+</style>

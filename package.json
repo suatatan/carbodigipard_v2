@@ -1,0 +1,25 @@
+{
+  "name": "carbodigipard_v2",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "optimize-images": "node scripts/optimize-images.js",
+    "deploy:prod": "npm run build && npx --yes netlify-cli deploy --prod --dir=dist",
+    "deploy:draft": "npm run build && npx --yes netlify-cli deploy --dir=dist",
+    "deploy:first": "npm run build && npx --yes netlify-cli deploy --prod --dir=dist --create-site",
+    "netlify:login": "npx --yes netlify-cli login",
+    "netlify:link": "npx --yes netlify-cli link"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.4",
+    "astro": "^6.2.2",
+    "sharp": "^0.34.5"
+  }
+}

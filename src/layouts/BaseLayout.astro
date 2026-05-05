@@ -1,0 +1,53 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: 'tr' | 'en';
+  image?: string;
+}
+
+const { title, description, lang, image } = Astro.props;
+const siteTitle = 'CARBODIGIPARD';
+const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+const canonical = Astro.url.href;
+const ogImage = image ?? '/uploads/og-default.png';
+---
+
+<!DOCTYPE html>
+<html lang={lang} dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{fullTitle}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={fullTitle} />
+  {description && <meta property="og:description" content={description} />}
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={siteTitle} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <meta name="generator" content={Astro.generator} />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">
+    {lang === 'tr' ? 'İçeriğe geç' : 'Skip to content'}
+  </a>
+  <Header lang={lang} />
+  <main id="main-content">
+    <slot />
+  </main>
+  <Footer lang={lang} />
+</body>
+</html>

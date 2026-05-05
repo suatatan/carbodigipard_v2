@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NewsCard from '../../../components/NewsCard.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = await getCollection('tr-news');
+const sortedNews = allNews.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout
+  title="Haberler"
+  description="CARBODIGIPARD projesine ait güncel haberler, duyurular ve etkinlikler."
+  lang="tr"
+>
+  <div class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Sayfa yolu">
+        <a href="/tr">Ana Sayfa</a>
+        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+        <span aria-current="page">Haberler</span>
+      </nav>
+      <h1>Haberler</h1>
+      <p>Projeden güncel gelişmeler, duyurular ve etkinlikler</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      {sortedNews.length === 0 ? (
+        <p class="empty-state">Henüz haber bulunmamaktadır.</p>
+      ) : (
+        <div class="grid-3">
+          {sortedNews.map((post) => (
+            <NewsCard
+              title={post.data.title}
+              summary={post.data.summary}
+              date={post.data.date}
+              slug={post.id}
+              category={post.data.category}
+              image={post.data.image}
+              lang="tr"
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .empty-state {
+    color: var(--color-text-muted);
+    text-align: center;
+    padding-block: 3rem;
+  }
+</style>
