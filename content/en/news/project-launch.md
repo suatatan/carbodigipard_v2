@@ -4,7 +4,7 @@ date: "2024-02-15"
 summary: "The CARBODIGIPARD project was officially launched with a kick-off meeting held in Ankara. Partners from six countries gathered to discuss project objectives, work packages, and the implementation timeline."
 category: "Announcement"
 image: ""
-featured: true
+featured: false
 ---
 
 ## Project Kick-Off Meeting

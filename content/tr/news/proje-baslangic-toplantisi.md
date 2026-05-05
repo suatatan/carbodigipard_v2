@@ -4,7 +4,7 @@ date: "2024-02-15"
 summary: "CARBODIGIPARD projesi, Ankara'da gerçekleştirilen açılış toplantısıyla resmi olarak faaliyete geçti. Altı ülkeden ortak kurumların bir araya geldiği etkinlikte projenin hedefleri ve iş paketleri paylaşıldı."
 category: "Duyuru"
 image: ""
-featured: true
+featured: false
 ---
 
 ## Proje Başlangıç Toplantısı

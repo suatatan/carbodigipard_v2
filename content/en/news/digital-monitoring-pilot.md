@@ -4,7 +4,7 @@ date: "2024-09-10"
 summary: "The pilot implementation of the digital carbon monitoring platform developed under CARBODIGIPARD has commenced at pilot farms in Turkey and Poland."
 category: "Announcement"
 image: ""
-featured: true
+featured: false
 ---
 
 ## Pilot Implementation Launch

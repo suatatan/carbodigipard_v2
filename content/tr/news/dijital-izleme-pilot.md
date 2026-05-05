@@ -4,7 +4,7 @@ date: "2024-09-10"
 summary: "CARBODIGIPARD kapsamında geliştirilen dijital karbon izleme platformunun pilot uygulaması, Türkiye ve Polonya'daki pilot çiftliklerde hayata geçirildi."
 category: "Duyuru"
 image: ""
-featured: true
+featured: false
 ---
 
 ## Pilot Uygulama Başlangıcı
