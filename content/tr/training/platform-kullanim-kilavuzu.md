@@ -8,7 +8,7 @@ duration: "30 dk"
 image: ""
 ---
 
-## Platform Kullanım Kılavuzu
+## Platform Kullanım Kılavuzu (Test yayını)
 
 Bu rehber, CARBODIGIPARD Dijital Karbon İzleme Platformu'nun temel özelliklerini ve kullanım adımlarını açıklamaktadır.
 

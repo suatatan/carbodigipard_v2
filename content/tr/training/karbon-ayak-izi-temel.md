@@ -8,7 +8,7 @@ duration: "45 dk"
 image: ""
 ---
 
-## Modül İçeriği
+## Modül İçeriği (Test yaını)
 
 Bu eğitim modülü, tarım sektöründe faaliyet gösteren üreticiler ve uzmanlar için hazırlanmıştır.
 

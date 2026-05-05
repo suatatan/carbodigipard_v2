@@ -2,8 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "./node_modules/.bin/astro dev",
-      "name": "Development server",
+      "command": "npm run dev",
+      "name": "🚀 Lokalde Çalıştır (npm run dev)",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "Remove-Item -Recurse -Force .astro -ErrorAction SilentlyContinue ; npm run dev",
+      "name": "🧹 Cache Temizle ve Çalıştır",
       "request": "launch",
       "type": "node-terminal"
     }

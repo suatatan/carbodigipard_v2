@@ -1,56 +1,47 @@
 [
   {
     "id": 1,
-    "name": "Ankara Üniversitesi",
-    "abbreviation": "AU",
+    "name": "Tarım ve Kırsal Kalkınmayı Destekleme Kurumu",
+    "abbreviation": "TKDK",
     "country": "Türkiye",
     "role": "Koordinatör",
-    "website": "https://www.ankara.edu.tr",
-    "logo": ""
+    "website": "https://www.tkdk.gov.tr",
+    "logo": "/uploads/TKDK.png"
   },
   {
     "id": 2,
-    "name": "Wageningen University & Research",
-    "abbreviation": "WUR",
-    "country": "Hollanda",
+    "name": "Bilecik Şeyh Edebali Üniversitesi",
+    "abbreviation": "BŞEÜ",
+    "country": "Türkiye",
     "role": "Ortak",
-    "website": "https://www.wur.nl",
-    "logo": ""
+    "website": "https://www.bilecik.edu.tr",
+    "logo": "/uploads/BSE.png"
   },
   {
     "id": 3,
-    "name": "University of Bologna",
-    "abbreviation": "UNIBO",
-    "country": "İtalya",
+    "name": "Nacionale Mokejimo Agentura",
+    "abbreviation": "NMA",
+    "country": "Litvanya",
     "role": "Ortak",
-    "website": "https://www.unibo.it",
-    "logo": ""
+    "website": "https://www.nma.lt",
+    "logo": "/uploads/NMA.png"
   },
   {
     "id": 4,
-    "name": "Warsaw University of Life Sciences",
-    "abbreviation": "SGGW",
-    "country": "Polonya",
+    "name": "University of South Bohemia in České Budějovice",
+    "abbreviation": "USB",
+    "country": "Çekya",
     "role": "Ortak",
-    "website": "https://www.sggw.edu.pl",
-    "logo": ""
+    "website": "https://www.usb.cz",
+    "logo": "/uploads/USB.png"
   },
   {
     "id": 5,
-    "name": "Thünen Institute",
-    "abbreviation": "TI",
-    "country": "Almanya",
+    "name": "Serbian IPARD Agency",
+    "abbreviation": "SIA",
+    "country": "Sırbistan",
     "role": "Ortak",
-    "website": "https://www.thuenen.de",
-    "logo": ""
-  },
-  {
-    "id": 6,
-    "name": "Instituto Nacional de Investigación y Tecnología Agraria y Alimentaria",
-    "abbreviation": "INIA",
-    "country": "İspanya",
-    "role": "Ortak",
-    "website": "https://www.inia.es",
-    "logo": ""
+    "website": "https://www.ipard.gov.rs",
+    "logo": "/uploads/SIA.png"
   }
 ]
