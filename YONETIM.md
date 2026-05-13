@@ -104,7 +104,7 @@ image: ""
 ```json
 {
   "platform": "LinkedIn",
-  "url": "https://linkedin.com/company/carbodigipard",
+  "url": "https://www.linkedin.com/in/carbodigipard-carbodigipard-3615023a0/",
   "icon": "in",
   "handle": "@carbodigipard"
 }
