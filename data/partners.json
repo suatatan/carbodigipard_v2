@@ -19,7 +19,7 @@
   },
   {
     "id": 3,
-    "name": "Nacionale Mokejimo Agentura",
+    "name": "Nacionale Mokejimo Agentura (Litvanya Ödeme Ajansı)",
     "abbreviation": "NMA",
     "country": "Litvanya",
     "role": "Ortak",
@@ -28,7 +28,7 @@
   },
   {
     "id": 4,
-    "name": "University of South Bohemia in České Budějovice",
+    "name": "University of South Bohemia in České Budějovice (Çekya Güney Bohemya Üniversitesi)",
     "abbreviation": "USB",
     "country": "Çekya",
     "role": "Ortak",
@@ -37,7 +37,7 @@
   },
   {
     "id": 5,
-    "name": "Serbian IPARD Agency",
+    "name": "Serbian IPARD Agency (Sırbistan IPARD Ajansı)",
     "abbreviation": "SIA",
     "country": "Sırbistan",
     "role": "Ortak",

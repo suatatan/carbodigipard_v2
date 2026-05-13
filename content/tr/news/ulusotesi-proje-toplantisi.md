@@ -1,6 +1,6 @@
 ---
 title: "CARBODIGIPARD Çekya Proje Toplantısı Başarıyla Gerçekleştirildi"
-date: "2026-04-01"
+date: "2026-04-15"
 summary: "Erasmus+ KA220-VET programı kapsamında yürütülen CARBODIGIPARD Projesi çerçevesinde düzenlenen Ulusötesi Proje Toplantısı başarıyla gerçekleştirildi. Karbon ayak izi metodolojileri, CBAM ve GHG Protokolü konularında kapsamlı değerlendirmeler yapıldı."
 category: "Etkinlik"
 image: "/uploads/ulusotesi-toplanti-1.jpg"

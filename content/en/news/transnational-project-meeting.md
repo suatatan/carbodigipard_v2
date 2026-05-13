@@ -1,6 +1,6 @@
 ---
 title: "CARBODIGIPARD Transnational Project Meeting Successfully Held"
-date: "2026-04-01"
+date: "2026-04-15"
 summary: "Within the scope of the Erasmus+ KA220-VET programme, the Transnational Project Meeting under the CARBODIGIPARD Project was successfully held. Comprehensive discussions and trainings were conducted on carbon footprint methodologies, CBAM, and the GHG Protocol."
 category: "Event"
 image: "/uploads/ulusotesi-toplanti-1.jpg"
