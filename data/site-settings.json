@@ -1,15 +1,17 @@
 {
   "title": "CARBODIGIPARD",
-  "taglineTr": "AB Destekli Karbon Dijitalleştirme Projesi",
-  "taglineEn": "EU-Funded Carbon Digitalization Project",
+  "taglineTr": "IPARD İşletmelerinde Eğitimler Vasıtasıyla Karbon Ayak izinin Azaltılmasına Yönelik Farkındalığın Arttırılması Projesi",
+  "taglineEn": "Reducing Carbon Footprint in IPARD Enterprises through Training and Awareness Raising Project",
   "descriptionTr": "CARBODIGIPARD, tarım ve sanayi sektörlerinde karbon ayak izinin dijital araçlarla izlenmesi ve azaltılmasını hedefleyen çok uluslu bir Avrupa Birliği projesidir.",
   "descriptionEn": "CARBODIGIPARD is a multinational European Union project aimed at monitoring and reducing the carbon footprint in agriculture and industry sectors through digital tools.",
-  "fundingTr": "Bu proje AB tarafından finanse edilmektedir.",
-  "fundingEn": "This project is funded by the European Union.",
+  "fundingTr": "Bu proje AB tarafından finanse edilmektedir. Proje ID: 2025-1-TR01-KA220-VET000356996 Erasmus+ Programı",
+  "fundingEn": "This project is funded by the European Union. Project ID: 2025-1-TR01-KA220-VET000356996 Erasmus+ Program",
   "grantAgreement": "2025-1-TR01-KA220-VET-000356996",
   "programTr": "Erasmus+",
   "programEn": "Erasmus+",
   "startDate": "2024-11-01",
   "endDate": "2028-01-01",
-  "contactEmail": "erasmus+@tkdk.gov.tr"
+  "duration": "2025 — 2028 (26 Ay)",
+  "contactEmail": "erasmus+@tkdk.gov.tr",
+  "budget": "€ 250.000"
 }

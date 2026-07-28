@@ -43,5 +43,14 @@
     "role": "Ortak",
     "website": "https://www.ipard.gov.rs",
     "logo": "/uploads/SIA.png"
+  },
+  {
+    "id": 6,
+    "name": "Isparta Uygulamalı Bilimler Üniversitesi",
+    "abbreviation": "ISUBÜ",
+    "country": "Türkiye",
+    "role": "Ortak",
+    "website": "https://www.isparta.edu.tr",
+    "logo": "/uploads/ISUBU.png"
   }
 ]
