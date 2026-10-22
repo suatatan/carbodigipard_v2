@@ -2,7 +2,7 @@
 /**
  * CARBODIGIPARD — Image Optimization Script
  *
- * Reads images from ./raw-images/ and outputs optimized WebP + JPEG versions
+ * Reads images from ./raw-images/ and outputs optimized WebP versions
  * into ./public/uploads/. Maintains original filenames with new extensions.
  *
  * Usage:
@@ -13,7 +13,7 @@
  */
 
 import sharp from 'sharp';
-import { readdir, mkdir } from 'node:fs/promises';
+import { readdir, mkdir, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -39,7 +39,6 @@ const SIZES = [
 
 const SUPPORTED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff', '.avif']);
 
-const JPEG_OPTIONS = { quality: 82, progressive: true };
 const WEBP_OPTIONS = { quality: 80 };
 
 // --- Main ---
@@ -79,11 +78,14 @@ async function run() {
         const webpOut = path.join(OUTPUT_DIR, `${outBase}.webp`);
         await pipeline.clone().webp(WEBP_OPTIONS).toFile(webpOut);
 
-        // JPEG (fallback)
-        const jpegOut = path.join(OUTPUT_DIR, `${outBase}.jpg`);
-        await pipeline.clone().jpeg(JPEG_OPTIONS).toFile(jpegOut);
+        // Keep one optimized format; remove any older JPEG variant.
+        await Promise.all(
+          ['.jpg', '.jpeg'].map((extension) =>
+            rm(path.join(OUTPUT_DIR, `${outBase}${extension}`), { force: true })
+          )
+        );
 
-        console.info(`  [OK] ${outBase} (${width}px) → WebP + JPEG`);
+        console.info(`  [OK] ${outBase} (${width}px) → WebP`);
         processed++;
       } catch (err) {
         console.error(`  [ERR] ${file} (${width}px): ${err.message}`);

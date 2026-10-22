@@ -2,6 +2,13 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Optimize News Photos (WebP)",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "optimize-images"],
+      "problemMatcher": []
+    },
+    {
       "label": "Deploy to Netlify (Production)",
       "type": "shell",
       "command": "npm",
