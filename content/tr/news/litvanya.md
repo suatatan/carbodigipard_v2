@@ -21,12 +21,12 @@ Vilnius’ta gerçekleştirilen toplantı ve teknik ziyaretler; proje ortakları
 
 TKDK koordinatörlüğünde yürütülen CARBODIGIPARD projesi ile IPARD kapsamında desteklenen tarımsal yatırımlarda karbon ayak izinin azaltılmasına yönelik farkındalığın ve kapasitenin artırılması, sürdürülebilir üretim uygulamalarının yaygınlaştırılması ve iklim dostu yatırımların desteklenmesine katkı sağlanması hedeflenmektedir.
 
-![Vilnius teknik değerlendirme toplantısı](/uploads/livtanya1.webp)
+![Litvanya](/uploads/livtanya1.jpg)
 
-![Toplantı katılımcıları](/uploads/livtanya2.webp)
+![Litvanya](/uploads/livtanya2.jpg)
 
-![Toplantı sunumu](/uploads/livtanya3.webp)
+![Litvanya](/uploads/livtanya3.jpg)
 
-![Akvapona teknik ziyareti](/uploads/livtanya4.webp)
+![Litvanya](/uploads/livtanya4.jpg)
 
-![LEAFOOD teknik ziyareti](/uploads/livtanya5.webp)
+![Litvanya](/uploads/livtanya5.jpg)
